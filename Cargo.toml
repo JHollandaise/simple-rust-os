@@ -1,0 +1,15 @@
+[package]
+name = "simple-rust-os"
+version = "0.1.0"
+authors = ["Joseph Holland <joseph_holland@outlook.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+# disables stack unwinding on panic
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
