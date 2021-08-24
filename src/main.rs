@@ -3,9 +3,20 @@
 
 use core::panic::PanicInfo;
 
+static HELLO: &[u8] = b"Hello World!";
+
 /// The entry point for our program
 #[no_mangle] // we want to keep the function symbol name the same
 pub extern "C" fn _start() -> ! {
+    let vga_buffer = 0xb8000 as *mut u8; // location of the vga buffer
+
+    for (i, &byte) in HELLO.iter().enumerate() {
+        unsafe {
+            *vga_buffer.offset(i as isize * 2) = byte;
+            *vga_buffer.offset(i as isize * 2 + 1) = 0xb; // light cyan
+        }
+    }
+
     loop {}
 }
 
